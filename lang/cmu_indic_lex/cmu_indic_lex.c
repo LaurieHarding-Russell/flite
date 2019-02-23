@@ -41,7 +41,7 @@
 #include "cst_ffeatures.h"
 #include "cmu_indic_lex.h"
 #include "cst_tokenstream.h"
-#include "../cmu_indic_lang/cmu_indic_lang.h"
+#include "cmu_indic_lang.h"
 
 extern cst_lexicon cmu_lex;
 

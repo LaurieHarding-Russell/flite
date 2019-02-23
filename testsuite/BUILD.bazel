@@ -1,0 +1,47 @@
+cc_binary(
+    name = "test",
+    srcs = ["flite_test_main.c"],
+    deps = [
+        "@flite//lang:usenglish"
+    ]
+)
+
+cc_binary(
+    name = "playWave",
+    srcs = ["play_wave_main.c"],
+    deps = [
+        "@flite//lang:usenglish"
+    ]
+)
+
+cc_binary(
+    name = "hrg",
+    srcs = ["hrg_test_main.c"],
+    deps = [
+        "@flite//lang:usenglish"
+    ]
+)
+
+cc_binary(
+    name = "wave",
+    srcs = ["asciiS2U_main.c"],
+    deps = [
+        "@flite//lang:usenglish"
+    ]
+)
+
+cc_binary(
+    name = "utt",
+    srcs = ["utt_test_main.c"],
+    deps = [
+        "@flite//lang:usenglish"
+    ]
+)
+
+cc_binary(
+    name = "lex",
+    srcs = ["lex_test_main.c"],
+    deps = [
+        "@flite//lang:usenglish"
+    ]
+)

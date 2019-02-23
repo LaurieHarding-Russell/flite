@@ -38,8 +38,8 @@
 /*                                                                       */
 /*************************************************************************/
 #include <stdio.h>
-#include "cst_wave.h"
-#include "cst_audio.h"
+#include "include/cst_wave.h"
+#include "include/cst_audio.h"
 
 int main(int argc, char **argv)
 {

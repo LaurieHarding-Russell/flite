@@ -38,9 +38,9 @@
 /*                                                                       */
 /*************************************************************************/
 
-#include "cst_string.h"
-#include "cst_wave.h"
-#include "cst_audio.h"
+#include "include/cst_string.h"
+#include "include/cst_wave.h"
+#include "include/cst_audio.h"
 
 cst_audiodev * audio_open_none(int sps, int channels, int fmt)
 {

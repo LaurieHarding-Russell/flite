@@ -1,0 +1,146 @@
+cc_library(
+  name = "cmulex",
+  srcs = [
+      "cmulex/cmu_lts_rules.c", 
+      "cmulex/cmu_lts_model.c",
+      "cmulex/cmu_lex.c", 
+      "cmulex/cmu_lex_entries.c", 
+      "cmulex/cmu_lex_data.c",
+      "cmulex/cmu_postlex.c"
+  ],
+  hdrs = [
+    "cmulex/cmu_lts_model.h", 
+    "cmulex/cmu_lex.h"
+  ],
+  textual_hdrs = [
+    "cmulex/cmu_lex_num_bytes.c", 
+    "cmulex/cmu_lex_data_raw.c",
+    "cmulex/cmu_lex_phones_huff_table.c",
+    "cmulex/cmu_lex_entries_huff_table.c"
+  ],
+  deps = [
+    "//:headers",
+  ],
+  includes = ["cmulex"],
+  visibility = ["//visibility:public"]
+)
+
+cc_library(
+  name = "graphemeLang",
+  srcs = [
+    "cmu_grapheme_lang/cmu_grapheme_lang.c", 
+    "cmu_grapheme_lang/cmu_grapheme_phoneset.c", 
+    "cmu_grapheme_lang/cmu_grapheme_phrasing_cart.c"
+  ],
+  hdrs = [
+    "cmu_grapheme_lang/cmu_grapheme_lang.h", 
+    "cmu_grapheme_lang/cmu_grapheme_phrasing_cart.h"
+  ],
+  includes = ["cmu_grapheme_lang"],
+  deps = [
+    "//:headers",
+  ],
+)
+
+cc_library(
+  name = "graphemeLex",
+  srcs = [
+    "cmu_grapheme_lex/cmu_grapheme_lex.c",
+    "cmu_grapheme_lex/grapheme_unitran_tables.c"
+  ],
+  hdrs = [
+    "cmu_grapheme_lex/cmu_grapheme_lex.h",
+  ],
+  deps = [
+    "//:headers",
+  ],
+  includes = ["cmu_grapheme_lex"],
+  visibility = ["//visibility:public"]
+)
+
+cc_library(
+  name = "lex",
+  srcs = [
+    "cmu_indic_lex/cmu_indic_lex.c",
+  ],
+  hdrs = [
+    "cmu_indic_lex/cmu_indic_lex.h", 
+  ],
+  deps = [
+    ":lang"
+  ],
+  includes = ["cmu_indic_lex"],
+  visibility = ["//visibility:public"]
+)
+
+cc_library(
+  name = "lang",
+  srcs = [
+    "cmu_indic_lang/cmu_indic_lang.c", 
+    "cmu_indic_lang/cmu_indic_phoneset.c",
+    "cmu_indic_lang/cmu_indic_phrasing_cart.c"
+  ],
+  hdrs = [
+    "cmu_indic_lang/cmu_indic_lang.h",
+    "cmu_indic_lang/cmu_indic_phrasing_cart.h",
+    "cmu_indic_lang/indic_num_table.h",
+    "cmu_indic_lang/indic_eng_num_table.h",
+    "cmu_indic_lang/indic_hin_num_table.h",
+    "cmu_indic_lang/indic_kan_num_table.h",
+    "cmu_indic_lang/indic_mar_num_table.h",
+    "cmu_indic_lang/indic_guj_num_table.h",
+    "cmu_indic_lang/indic_tam_num_table.h",
+    "cmu_indic_lang/indic_tel_num_table.h",
+    "cmu_indic_lang/indic_pan_num_table.h"
+  ],
+  deps = [
+    "//:headers",
+  ],
+  includes = ["cmu_indic_lang"],
+  visibility = ["//visibility:public"]
+)
+
+cc_library(
+  name = "usenglish",
+  srcs = [
+    "usenglish/us_int_accent_cart.c", 
+    "usenglish/us_int_tone_cart.c",
+    "usenglish/us_f0_model.c",
+    "usenglish/us_dur_stats.c", 
+    "usenglish/us_durz_cart.c", 
+    "usenglish/us_f0lr.c",
+    "usenglish/us_phoneset.c", 
+    "usenglish/us_ffeatures.c", 
+    "usenglish/us_phrasing_cart.c",
+    "usenglish/us_gpos.c", 
+    "usenglish/us_text.c", 
+    "usenglish/us_expand.c",
+    "usenglish/us_nums_cart.c",
+    "usenglish/us_aswd.c", 
+    "usenglish/usenglish.c", 
+    "usenglish/us_pos_cart.c"
+  ],
+  hdrs = [
+    "usenglish/usenglish.h", 
+    "usenglish/us_int_accent_cart.h", 
+    "usenglish/us_int_tone_cart.h", 
+    "usenglish/us_durz_cart.h",
+    "usenglish/us_ffeatures.h", 
+    "usenglish/us_phrasing_cart.h", 
+    "usenglish/us_text.h", 
+    "usenglish/us_f0.h",
+    "usenglish/us_nums_cart.h",
+    "usenglish/us_regexes.h", 
+    "usenglish/us_pos_cart.h"
+  ],
+  includes = ["usenglish"],
+  deps = [
+    ":lex",
+    ":graphemeLex",
+    ":cmulex",
+    ":lang",
+    ":graphemeLang",
+    "//src:synth",
+  ],
+  visibility = ["//visibility:public"]
+)

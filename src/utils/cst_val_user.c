@@ -67,6 +67,8 @@ CST_VAL_REG_TD_TYPE(cg_db,cst_cg_db,49)
 CST_VAL_REG_TD_TYPE(voice,cst_voice,51)
 CST_VAL_REG_TD_TYPE(audio_streaming_info,cst_audio_streaming_info,53)
 
+
+// FIXME, commented out code that should/might be essentail?
 const cst_val_def cst_val_defs[] = {
     /* These ones are never called */
     { "int"  , NULL },                      /* 1 INT */

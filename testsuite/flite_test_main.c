@@ -56,15 +56,15 @@ int main(int argc, char **argv)
 
     if (argc != 4)
     {
-	fprintf(stderr,"usage: VOICE.flitevox TEXT WAVEFILE\n");
-	return 1;
+        fprintf(stderr,"usage: VOICE.flitevox TEXT WAVEFILE\n");
+        return 1;
     }
 
     voice_pathname = argv[1]; /* pathname to .flitevox file */
     text = argv[2];           /* text to be synthesized */
     outfile = argv[3];        /* output file (or "play" or "none") */
 
-    /* Initialize Flite, and set up language and lexicon */
+    // /* Initialize Flite, and set up language and lexicon */
     flite_init();
     flite_add_lang("eng",usenglish_init,cmulex_init);
     flite_add_lang("usenglish",usenglish_init,cmulex_init);

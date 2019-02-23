@@ -1,0 +1,6 @@
+bazel-*
+*.orig
+*.o
+*.a
+build/*
+bin/*

@@ -5,9 +5,7 @@
 #include "cst_string.h"
 #include "cst_lexicon.h"
 
-const int cmu_lex_num_bytes = 
-#include "cmu_lex_num_bytes.c"
-;
+const int cmu_lex_num_bytes = 410522;
 
 const int cmu_lex_num_entries = 36963;
 

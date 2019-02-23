@@ -38,7 +38,7 @@
 /*                                                                       */
 /*************************************************************************/
 #include <stdio.h>
-#include "cst_hrg.h"
+#include "include/cst_hrg.h"
 
 int main(int argc, char **argv)
 {
