@@ -37,9 +37,9 @@
 /*  Access to audio devices                                   ,          */
 /*                                                                       */
 /*************************************************************************/
-#include "include/cst_string.h"
-#include "include/cst_wave.h"
-#include "include/cst_audio.h"
+#include "cst_string.h"
+#include "cst_wave.h"
+#include "cst_audio.h"
 #include "native_audio.h"
 
 int audio_bps(cst_audiofmt fmt)

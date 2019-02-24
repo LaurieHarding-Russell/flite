@@ -36,3 +36,15 @@ cc_library(
     visibility = ["//visibility:public"],
 )"""
     )
+
+    native.new_local_repository(
+        name = "system_include_x86_64_alsa",
+        path = "/usr/include/alsa",
+        build_file_content = """
+cc_library(
+    name = "alsa",
+    hdrs = glob(["*.h", "sound/*.h"]),
+    visibility = ["//visibility:public"],
+    includes = ["."]
+)"""
+    )

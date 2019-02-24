@@ -44,9 +44,9 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <sys/types.h>
-#include "include/cst_string.h"
-#include "include/cst_wave.h"
-#include "include/cst_audio.h"
+#include "cst_string.h"
+#include "cst_wave.h"
+#include "cst_audio.h"
 
 // #ifdef CST_AUDIO_LINUX
 /* Linux/voxware audio specific */

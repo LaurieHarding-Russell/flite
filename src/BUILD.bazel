@@ -26,30 +26,24 @@ cc_library(
       "audio/au_command.c", 
       "audio/au_none.c", 
       "audio/au_oss.c", 
-      # "audio/au_alsa.c",
+      "audio/au_alsa.c",
       "audio/auclient.c", 
       "audio/auserver.c", 
       "audio/audio.c",
       "audio/au_streaming.c"
   ],
   hdrs = [
-      # "include/cst_audio.h",
       "audio/native_audio.h",
   ],
   deps = [
-        ":speech",
-        # "@system_libsx86_64//:alsa", 
-        "@system_include_x86_64//:soundcard",
-        "@system_include_x86_64//:ioctl",
-        "@system_include_x86_64//:fcntl",
-      ],
-      # select(
-      #     {
-      #         "@system_libsx86_64//:alsa": [":x86_dev_lib"],
-      #         "@system_libsArm32//:alsa": [":arm_lib"],
-      #     },
-      #     no_match_error = "Sorry, haven't figured out that architecture yet. Feel free to fix and pull request it."
-      # ),
+    "//:headers",
+    ":speech",
+    "@system_libsx86_64//:alsa", 
+    "@system_include_x86_64_alsa//:alsa",
+    "@system_include_x86_64//:soundcard",
+    "@system_include_x86_64//:ioctl",
+    "@system_include_x86_64//:fcntl",
+  ],
   includes = ["audio"],
   visibility = ["//visibility:private"]
 )
@@ -92,7 +86,7 @@ cc_library(
     ],
     deps = [
         "//:headers",
-        ":utils",
+        ":audio"
     ],
     includes = ["hrg"],
     visibility = ["//visibility:private"]
@@ -143,6 +137,7 @@ cc_library(
   hdrs = ["speech/g72x.h"],
   deps = [
     "//:headers",
+    ":utils",
   ],
   includes = ["speech"],
   visibility = ["//visibility:private"]
@@ -183,7 +178,6 @@ cc_library(
   ],
   deps = [
     "//:headers",
-    ":audio"
   ],
   includes = ["utils"],
   visibility = ["//visibility:private"]

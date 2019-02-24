@@ -47,9 +47,9 @@
 #include <assert.h>
 #include <errno.h>
 
-#include "include/cst_string.h"
-#include "include/cst_wave.h"
-#include "include/cst_audio.h"
+#include "cst_string.h"
+#include "cst_wave.h"
+#include "cst_audio.h"
 
 #include <alsa/asoundlib.h>
 
