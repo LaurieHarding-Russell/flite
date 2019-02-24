@@ -1,3 +1,7 @@
+load('@flite//toolchain:load_voice.bzl', 'load_voice')
+
+load_voice("slt")
+
 cc_library(
   name = "cmulex",
   srcs = [

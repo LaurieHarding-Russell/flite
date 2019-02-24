@@ -1,26 +1,5 @@
 package(default_visibility = ["//visibility:public"])
 
-cc_library(
-  name = "voice-slt",
-  srcs = glob(["lang/cmu_us_slt/*.c"]),
-  hdrs = glob(["lang/cmu_us_slt/*.h"]),
-  deps = [
-    "//lang:usenglish"
-  ],
-  includes = ["lang/cmu_us_slt"],
-  visibility = ["//visibility:public"]
-)
-
-cc_library(
-  name = "awb",
-  srcs = glob(["lang/cmu_time_awb/*.c"]),
-  hdrs = glob(["lang/cmu_time_awb/*.h"]),
-  deps = [
-    "//lang:usenglish"
-  ],
-  includes = ["lang/cmu_time_awb"],
-  visibility = ["//visibility:public"]
-)
 
 cc_library(
   name = "headers",
