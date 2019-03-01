@@ -63,7 +63,7 @@
 
 #endif
 
-// #ifdef CST_AUDIO_LINUX
+#ifdef CST_AUDIO_LINUX
 
 #define AUDIO_OPEN_NATIVE audio_open_oss
 #define AUDIO_CLOSE_NATIVE audio_close_oss
@@ -72,9 +72,9 @@
 #define AUDIO_DRAIN_NATIVE audio_drain_oss
 #define AUDIO_FLUSH_NATIVE audio_flush_oss
 
-// #endif
+#endif
 
-#ifdef CST_AUDIO_ALSA
+// #ifdef CST_AUDIO_ALSA
 
 #define AUDIO_OPEN_NATIVE audio_open_alsa
 #define AUDIO_CLOSE_NATIVE audio_close_alsa
@@ -83,7 +83,7 @@
 #define AUDIO_DRAIN_NATIVE audio_drain_alsa
 #define AUDIO_FLUSH_NATIVE audio_flush_alsa
 
-#endif
+// #endif
 
 #ifdef CST_AUDIO_PULSEAUDIO
 

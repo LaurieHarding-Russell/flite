@@ -1,18 +1,6 @@
-def loadLinuxX86_64bit(visibility=None):
+def loadLinux_X86_64bit(visibility=None):    
     native.new_local_repository(
-        name = "system_libsx86_64",
-        path = "/usr/lib/x86_64-linux-gnu",
-        build_file_content = """
-cc_library(
-    name = "alsa",
-    srcs = glob(["alsa-lib/*.so"]),
-    visibility = ["//visibility:public"],
-)
-        """
-    )
-
-    native.new_local_repository(
-        name = "system_include_x86_64",
+        name = "system_include_x86_64_linux",
         path = "/usr/include/linux",
         build_file_content = """
 cc_library(
@@ -37,14 +25,56 @@ cc_library(
 )"""
     )
 
+
+def alsa_X86_64bit(visibility=None):
     native.new_local_repository(
-        name = "system_include_x86_64_alsa",
-        path = "/usr/include/alsa",
+        name = "alsa_x86_64",
+        path = "/usr",
         build_file_content = """
 cc_library(
     name = "alsa",
-    hdrs = glob(["*.h", "sound/*.h"]),
+    srcs = glob(["alsa-lib/*.so"]) +
+    [
+        "lib/x86_64-linux-gnu/libasound.so",
+        "lib/x86_64-linux-gnu/libasound.so.2",
+        "lib/x86_64-linux-gnu/libasound.so.2.0.0",
+        "lib/x86_64-linux-gnu/libalsatoss.so",
+        "lib/x86_64-linux-gnu/libalsatoss.so.0",
+        "lib/x86_64-linux-gnu/libalsatoss.so.0.0.0",
+        # "lib/x86_64-linux-gnu/libalsaoss.so",
+        # "lib/x86_64-linux-gnu/libalsaoss.so.0",
+        # "lib/x86_64-linux-gnu/libalsaoss.so.0.0.0",
+    ],
+    hdrs = glob(["include/alsa/*.h", "include/alsa/sound/*.h"]),
+    deps = [
+        "@system_include_x86_64_linux//:types",
+        "@system_include_x86_64_linux//:ioctl",
+        "@system_include_x86_64_linux//:fcntl",
+    ],
     visibility = ["//visibility:public"],
-    includes = ["."]
-)"""
+)
+        """
+    )
+
+def pulse_X86_64bit(visibility=None):
+    native.new_local_repository(
+        name = "pulse_x86_64",
+        path = "/usr",
+        build_file_content = """
+cc_library(
+    name = "pulse",
+    srcs = [
+        "/lib/x86_64-linux-gnu/pulseaudio/libpulsecommon-10.0.so",
+        "/lib/x86_64-linux-gnu/pulseaudio/libpulsecore-10.0.so",
+        "/lib/x86_64-linux-gnu/pulseaudio/libpulsedsp.so",
+    ],
+    hdrs = glob(["include/alsa/*.h", "include/alsa/sound/*.h"]),
+    deps = [
+        "@system_include_x86_64_linux//:types",
+        "@system_include_x86_64_linux//:ioctl",
+        "@system_include_x86_64_linux//:fcntl",
+    ],
+    visibility = ["//visibility:public"],
+)
+        """
     )

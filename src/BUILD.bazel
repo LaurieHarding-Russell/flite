@@ -38,11 +38,10 @@ cc_library(
   deps = [
     "//:headers",
     ":speech",
-    "@system_libsx86_64//:alsa", 
-    "@system_include_x86_64_alsa//:alsa",
-    "@system_include_x86_64//:soundcard",
-    "@system_include_x86_64//:ioctl",
-    "@system_include_x86_64//:fcntl",
+    "@alsa_x86_64//:alsa", 
+    "@system_include_x86_64_linux//:soundcard",
+    "@system_include_x86_64_linux//:ioctl",
+    "@system_include_x86_64_linux//:fcntl",
   ],
   includes = ["audio"],
   visibility = ["//visibility:private"]
