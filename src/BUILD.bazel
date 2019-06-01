@@ -1,11 +1,27 @@
+config_setting(
+    name = "linux_x86",
+    constraint_values = [
+        "@bazel_tools//platforms:linux",
+        "@bazel_tools//platforms:x86_64",
+    ],
+)
+
+config_setting(
+    name = "osx_x86",
+    constraint_values = [
+        "@bazel_tools//platforms:osx",
+        "@bazel_tools//platforms:x86_64"
+    ],
+)
+
 cc_library(
     name = "synth",
     srcs = [
-        "synth/cst_synth.c", 
-        "synth/cst_utt_utils.c", 
-        "synth/cst_voice.c", 
+        "synth/cst_synth.c",
+        "synth/cst_utt_utils.c",
+        "synth/cst_voice.c",
         "synth/cst_phoneset.c",
-        "synth/cst_ffeatures.c", 
+        "synth/cst_ffeatures.c",
         "synth/cst_ssml.c",
         "synth/flite.c"
     ],
@@ -22,27 +38,50 @@ cc_library(
 
 cc_library(
   name = "audio",
-  srcs = [ 
-      "audio/au_command.c", 
-      "audio/au_none.c", 
-      "audio/au_oss.c", 
-      "audio/au_alsa.c",
-      "audio/auclient.c", 
-      "audio/auserver.c", 
+  srcs = [
+      "audio/au_command.c",
+      "audio/au_none.c",
+      "audio/auclient.c",
+      "audio/auserver.c",
       "audio/audio.c",
       "audio/au_streaming.c"
-  ],
+  ] +
+  select({
+      "linux_x86": [
+        "audio/au_oss.c",
+        "audio/au_alsa.c",
+      ],
+      "osx_x86": [
+
+      ]
+  }),
   hdrs = [
       "audio/native_audio.h",
   ],
   deps = [
     "//:headers",
     ":speech",
-    "@alsa_x86_64//:alsa", 
-    "@system_include_x86_64_linux//:soundcard",
-    "@system_include_x86_64_linux//:ioctl",
-    "@system_include_x86_64_linux//:fcntl",
-  ],
+  ] +
+    select({
+        "linux_x86": [
+            "@alsa_x86_64//:alsa",
+            "@system_include_x86_64_linux//:soundcard",
+            "@system_include_x86_64_linux//:ioctl",
+            "@system_include_x86_64_linux//:fcntl",
+        ],
+        "osx_x86": [
+
+        ]
+    }),
+  defines = select({
+      "linux_x86": [
+        "CST_AUDIO_LINUX",
+        "CST_AUDIO_ALSA",
+      ],
+      "osx_x86": [
+        "CST_AUDIO_NONE",
+      ]
+  }),
   includes = ["audio"],
   visibility = ["//visibility:private"]
 )
@@ -51,12 +90,12 @@ cc_library(
   name = "cg",
   srcs = [
       "cg/cst_cg.c",
-      "cg/cst_mlsa.c", 
-      "cg/cst_mlpg.c", 
-      "cg/cst_vc.c", 
+      "cg/cst_mlsa.c",
+      "cg/cst_mlpg.c",
+      "cg/cst_vc.c",
       "cg/cst_cg_load_voice.c",
-      "cg/cst_cg_dump_voice.c", 
-      "cg/cst_cg_map.c", 
+      "cg/cst_cg_dump_voice.c",
+      "cg/cst_cg_map.c",
       "cg/cst_spamf0.c"
   ],
   hdrs = [
@@ -94,8 +133,8 @@ cc_library(
 cc_library(
     name = "lexicon",
     srcs = [
-        "lexicon/cst_lexicon.c", 
-        "lexicon/cst_lts.c", 
+        "lexicon/cst_lexicon.c",
+        "lexicon/cst_lts.c",
         "lexicon/cst_lts_rewrites.c"
     ],
     includes = ["lexicon"],
@@ -109,7 +148,7 @@ cc_library(
   name = "regex",
   srcs = [
     "regex/cst_regex.c",
-    "regex/regexp.c", 
+    "regex/regexp.c",
     "regex/regsub.c",
   ],
   hdrs = ["regex/cst_regex_defs.h"],
@@ -122,16 +161,16 @@ cc_library(
 
 cc_library(
   name = "speech",
-  srcs = ["speech/cst_wave.c", 
-          "speech/cst_wave_io.c", 
-          "speech/cst_track.c", 
+  srcs = ["speech/cst_wave.c",
+          "speech/cst_wave_io.c",
+          "speech/cst_track.c",
           "speech/cst_track_io.c",
-          "speech/cst_wave_utils.c", 
-          "speech/cst_lpcres.c", 
+          "speech/cst_wave_utils.c",
+          "speech/cst_lpcres.c",
           "speech/rateconv.c",
-          "speech/g721.c", 
-          "speech/g72x.c", 
-          "speech/g723_24.c", 
+          "speech/g721.c",
+          "speech/g72x.c",
+          "speech/g723_24.c",
           "speech/g723_40.c"],
   hdrs = ["speech/g72x.h"],
   deps = [
@@ -146,7 +185,7 @@ cc_library(
   name = "stats",
   srcs = [
     "stats/cst_cart.c",
-    "stats/cst_viterbi.c", 
+    "stats/cst_viterbi.c",
     "stats/cst_ss.c"
   ],
   deps = [
@@ -160,11 +199,11 @@ cc_library(
   name = "utils",
   srcs = [
     "utils/cst_alloc.c",
-    "utils/cst_error.c", 
-    "utils/cst_string.c", 
+    "utils/cst_error.c",
+    "utils/cst_string.c",
     "utils/cst_wchar.c",
     "utils/cst_tokenstream.c",
-    "utils/cst_val.c", 
+    "utils/cst_val.c",
     "utils/cst_features.c",
     "utils/cst_endian.c",
     "utils/cst_socket.c",
@@ -186,9 +225,9 @@ cc_library(
   name = "wavesynth",
   srcs = [
     "wavesynth/cst_units.c",
-    "wavesynth/cst_clunits.c", 
+    "wavesynth/cst_clunits.c",
     "wavesynth/cst_diphone.c",
-    "wavesynth/cst_sigpr.c", 
+    "wavesynth/cst_sigpr.c",
     "wavesynth/cst_sts.c",
     "wavesynth/cst_reflpc.c"
   ],
