@@ -64,10 +64,10 @@ cc_library(
   ] +
     select({
         "linux_x86": [
-            "@alsa_x86_64//:alsa",
-            "@system_include_x86_64_linux//:soundcard",
-            "@system_include_x86_64_linux//:ioctl",
-            "@system_include_x86_64_linux//:fcntl",
+            # "@alsa_x86_64//:alsa",
+            # "@system_include_x86_64_linux//:soundcard",
+            # "@system_include_x86_64_linux//:ioctl",
+            # "@system_include_x86_64_linux//:fcntl",
         ],
         "osx_x86": [
 
@@ -82,6 +82,11 @@ cc_library(
         "CST_AUDIO_NONE",
       ]
   }),
+  linkopts = [
+        "-lsndfile",
+        "-lpthread",
+        "-lasound",
+  ],
   includes = ["audio"],
   visibility = ["//visibility:private"]
 )
